@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FaInstagram, FaTwitter, FaLinkedin, FaGithub, FaChevronRight } from 'react-icons/fa';
+import { Progress } from '@/components/ui/progress';
 
 export function WhoIAm() {
   return (
@@ -65,20 +66,16 @@ Life is all about finding joy in the little things, and these passions bring me 
               </h4>
               <h3 className='font-body text-3xl font-bold text-violet-800'>95%</h3>
             </div>
-            <div className='mt-2 h-3 w-full rounded-full bg-lila'>
-              <div className='h-3 rounded-full bg-violet-800' style={{ width: '95%' }}></div>
-            </div>
+            <Progress value={95} className='mt-2 h-3 w-full' />
           </div>
           <div className='pt-6'>
             <div className='flex items-end justify-between'>
               <h4 className='font-body font-semibold uppercase text-black dark:text-white'>
-                Javascript
+                Javascript / Typescript
               </h4>
-              <h3 className='font-body text-3xl font-bold text-violet-800'>98%</h3>
+              <h3 className='font-body text-3xl font-bold text-violet-800'>95%</h3>
             </div>
-            <div className='mt-2 h-3 w-full rounded-full bg-lila'>
-              <div className='h-3 rounded-full bg-violet-800' style={{ width: '98%' }}></div>
-            </div>
+            <Progress value={95} className='mt-2 h-3 w-full' />
           </div>
           <div className='pt-6'>
             <div className='flex items-end justify-between'>
@@ -87,20 +84,16 @@ Life is all about finding joy in the little things, and these passions bring me 
               </h4>
               <h3 className='font-body text-3xl font-bold text-violet-800'>98%</h3>
             </div>
-            <div className='mt-2 h-3 w-full rounded-full bg-lila'>
-              <div className='h-3 rounded-full bg-violet-800' style={{ width: '98%' }}></div>
-            </div>
+            <Progress value={98} className='mt-2 h-3 w-full' />
           </div>
           <div className='pt-6'>
             <div className='flex items-end justify-between'>
               <h4 className='font-body font-semibold uppercase text-black dark:text-white'>
-                Figma
+                Next JS
               </h4>
-              <h3 className='font-body text-3xl font-bold text-violet-800'>91%</h3>
+              <h3 className='font-body text-3xl font-bold text-violet-800'>90%</h3>
             </div>
-            <div className='mt-2 h-3 w-full rounded-full bg-lila'>
-              <div className='h-3 rounded-full bg-violet-800' style={{ width: '91%' }}></div>
-            </div>
+            <Progress value={90} className='mt-2 h-3 w-full' />
           </div>
         </div>
       </div>
