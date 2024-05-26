@@ -22,8 +22,8 @@ export default function Navbar(props: NavbarProps) {
             <Link
               href='/'
               className={cn(
-                'transition-colors hover:text-green-500 no-wrap',
-                pathname?.startsWith('/') ? 'text-green-500 font-bold' : 'text-foreground'
+                'transition-colors hover:text-violet-500 no-wrap',
+                pathname?.startsWith('/') ? 'text-violet-500 font-bold' : 'text-foreground'
               )}
             >
               Home
@@ -33,14 +33,16 @@ export default function Navbar(props: NavbarProps) {
 
         <div className='items-center justify-between flex-1 hidden md:flex gap-x-2 md:justify-end'>
           <div className='flex flex-row gap-2'>
-            <Button onClick={() => setTheme('light')} disabled={theme === 'light'}>
-              <FaSun className='w-4 h-4 mr-2' />
-              Light mode
-            </Button>
-
-            <Button onClick={() => setTheme('dark')} disabled={theme === 'dark'}>
-              <FaMoon className='w-4 h-4 mr-2' />
-              Dark mode
+            <Button
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+              variant='outline'
+              size='icon'
+            >
+              {theme === 'light' ? (
+                <FaMoon />
+              ) : (
+                <FaSun />
+              )}
             </Button>
           </div>
         </div>
