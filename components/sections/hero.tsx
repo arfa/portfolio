@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
-import { FaInstagram, FaTwitter, FaLinkedin, FaFacebook, FaChevronRight } from 'react-icons/fa';
+import { FaInstagram, FaTwitter, FaLinkedin, FaGithub, FaChevronRight } from 'react-icons/fa';
 
 export function Hero() {
   return (
@@ -25,13 +25,9 @@ export function Hero() {
                 </div>
               </div>
               <div className='flex items-center justify-center pt-5 pl-2 sm:justify-start sm:pt-0'>
-                <Link
-                  href='https://www.facebook.com/Arfa.Marouen/'
-                  target='_blank'
-                  className='pl-4'
-                >
+                <Link href='https://github.com/arfa' target='_blank' className='pl-4'>
                   <i className='bx bxl-facebook-square text-2xl text-white hover:text-yellow-300'>
-                    <FaFacebook />
+                    <FaGithub />
                   </i>
                 </Link>
                 <Link href='https://twitter.com/MarwenArfa' target='_blank' className='pl-4'>

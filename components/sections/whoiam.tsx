@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaInstagram, FaTwitter, FaLinkedin, FaFacebook, FaChevronRight } from 'react-icons/fa';
+import { FaInstagram, FaTwitter, FaLinkedin, FaGithub, FaChevronRight } from 'react-icons/fa';
 
 export function WhoIAm() {
   return (
@@ -38,8 +38,8 @@ Life is all about finding joy in the little things, and these passions bring me 
               </div>
             </div>
             <div className='flex items-center justify-center pt-5 pl-2 sm:justify-start sm:pt-0'>
-              <Link href='https://www.facebook.com/Arfa.Marouen/' target='_blank' className='pl-4'>
-                <FaFacebook className='text-xl text-violet-800 hover:text-violet-800' />
+              <Link href='https://github.com/arfa' target='_blank' className='pl-4'>
+                <FaGithub className='text-xl text-violet-800 hover:text-violet-800' />
               </Link>
               <Link href='https://twitter.com/MarwenArfa' target='_blank' className='pl-4'>
                 <FaTwitter className='text-xl text-violet-800 hover:text-violet-800' />
