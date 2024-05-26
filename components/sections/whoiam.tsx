@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { FaInstagram, FaTwitter, FaLinkedin, FaGithub, FaChevronRight } from 'react-icons/fa';
 import { Progress } from '@/components/ui/progress';
+import { Expertise } from '../Expertise';
+import { ConnectWithMe } from '../ConnectWithMe';
 
 export function WhoIAm() {
   return (
@@ -26,75 +28,25 @@ I have a deep love for video games and anime, which transport me to exciting vir
 
           <p className='pt-6 font-body leading-relaxed text-grey-20'>
             {`Music holds a special place in my heart, and I'm constantly exploring different genres and artists.
-
+            
 Life is all about finding joy in the little things, and these passions bring me endless inspiration and happiness.`}
           </p>
-          <div className='flex flex-col justify-center pt-6 sm:flex-row lg:justify-start'>
-            <div className='flex items-center justify-center sm:justify-start'>
-              <p className='font-body text-lg font-semibold uppercase text-grey-20'>
-                Connect with me
-              </p>
-              <div className='hidden sm:block ml-2'>
-                <FaChevronRight className=' text-xl text-violet-500' />
-              </div>
-            </div>
-            <div className='flex items-center justify-center pt-5 pl-2 sm:justify-start sm:pt-0'>
-              <Link href='https://github.com/arfa' target='_blank' className='pl-4'>
-                <FaGithub className='text-xl text-violet-800 hover:text-violet-800' />
-              </Link>
-              <Link href='https://twitter.com/MarwenArfa' target='_blank' className='pl-4'>
-                <FaTwitter className='text-xl text-violet-800 hover:text-violet-800' />
-              </Link>
-              <Link
-                href='https://www.linkedin.com/in/marwen-arfa/'
-                target='_blank'
-                className='pl-4'
-              >
-                <FaLinkedin className='text-xl text-violet-800 hover:text-violet-800' />
-              </Link>
-              <Link href='https://www.instagram.com/marwen_arfa/' target='_blank' className='pl-4'>
-                <FaInstagram className='text-xl text-violet-800 hover:text-violet-800' />
-              </Link>
-            </div>
-          </div>
+          <ConnectWithMe
+            title='Connect With Me'
+            github='https://github.com/arfa'
+            twitter='https://twitter.com/MarwenArfa'
+            linkedin='https://www.linkedin.com/in/marwen-arfa/'
+            instagram='https://www.instagram.com/marwen_arfa/'
+            color='text-violet-800'
+            hoverColor='text-violet-500'
+            chevronColor='text-violet-500'
+          />
         </div>
         <div className='pl-0 pt-10 w-full lg:w-2/5 lg:pl-12 lg:pt-0'>
-          <div>
-            <div className='flex items-end justify-between'>
-              <h4 className='font-body font-semibold uppercase text-black dark:text-white'>
-                HTML &amp; CSS
-              </h4>
-              <h3 className='font-body text-3xl font-bold text-violet-800'>95%</h3>
-            </div>
-            <Progress value={95} className='mt-2 h-3 w-full' />
-          </div>
-          <div className='pt-6'>
-            <div className='flex items-end justify-between'>
-              <h4 className='font-body font-semibold uppercase text-black dark:text-white'>
-                Javascript / Typescript
-              </h4>
-              <h3 className='font-body text-3xl font-bold text-violet-800'>95%</h3>
-            </div>
-            <Progress value={95} className='mt-2 h-3 w-full' />
-          </div>
-          <div className='pt-6'>
-            <div className='flex items-end justify-between'>
-              <h4 className='font-body font-semibold uppercase text-black dark:text-white'>
-                React JS
-              </h4>
-              <h3 className='font-body text-3xl font-bold text-violet-800'>98%</h3>
-            </div>
-            <Progress value={98} className='mt-2 h-3 w-full' />
-          </div>
-          <div className='pt-6'>
-            <div className='flex items-end justify-between'>
-              <h4 className='font-body font-semibold uppercase text-black dark:text-white'>
-                Next JS
-              </h4>
-              <h3 className='font-body text-3xl font-bold text-violet-800'>90%</h3>
-            </div>
-            <Progress value={90} className='mt-2 h-3 w-full' />
-          </div>
+          <Expertise title='HTML & CSS' percentage={95} className='pt-6' />
+          <Expertise title='Javascript / Typescript' percentage={95} className='pt-6' />
+          <Expertise title='React JS' percentage={98} className='pt-6' />
+          <Expertise title='Next JS' percentage={95} className='pt-6' />
         </div>
       </div>
     </div>
