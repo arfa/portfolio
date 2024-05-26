@@ -12,37 +12,43 @@ interface NavbarProps {}
 
 export default function Navbar(props: NavbarProps) {
   const pathname = usePathname();
+  console.log('pathname: ', pathname);
   const { setTheme, theme } = useTheme();
 
   return (
     <header className='sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
-      <div className='container flex items-center justify-between h-16 gap-x-8 max-w-screen-2xl'>
-        <div className={'hidden md:flex'}>
+      <div className='container flex items-center justify-between h-16 gap-x-8'>
+        <div className={'flex'}>
           <nav className='flex items-center gap-8 text-sm'>
             <Link
               href='/'
               className={cn(
                 'transition-colors hover:text-violet-500 no-wrap',
-                pathname?.startsWith('/') ? 'text-violet-500 font-bold' : 'text-foreground'
+                pathname === '/' ? 'text-violet-500 font-bold' : 'text-foreground'
               )}
             >
               Home
             </Link>
+            <Link
+              href='posts'
+              className={cn(
+                'transition-colors hover:text-violet-500 no-wrap',
+                pathname === '/posts' ? 'text-violet-500 font-bold' : 'text-foreground'
+              )}
+            >
+              Blog
+            </Link>
           </nav>
         </div>
 
-        <div className='items-center justify-between flex-1 hidden md:flex gap-x-2 md:justify-end'>
+        <div className='items-center flex-1 flex gap-x-2 justify-end'>
           <div className='flex flex-row gap-2'>
             <Button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               variant='outline'
               size='icon'
             >
-              {theme === 'light' ? (
-                <FaMoon />
-              ) : (
-                <FaSun />
-              )}
+              {theme === 'light' ? <FaMoon /> : <FaSun />}
             </Button>
           </div>
         </div>

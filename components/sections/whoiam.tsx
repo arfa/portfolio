@@ -57,10 +57,12 @@ Life is all about finding joy in the little things, and these passions bring me 
             </div>
           </div>
         </div>
-        <div className='pl-0 pt-10 sm:w-3/4 lg:w-2/5 lg:pl-12 lg:pt-0'>
+        <div className='pl-0 pt-10 w-full lg:w-2/5 lg:pl-12 lg:pt-0'>
           <div>
             <div className='flex items-end justify-between'>
-              <h4 className='font-body font-semibold uppercase text-black dark:text-white'>HTML &amp; CSS</h4>
+              <h4 className='font-body font-semibold uppercase text-black dark:text-white'>
+                HTML &amp; CSS
+              </h4>
               <h3 className='font-body text-3xl font-bold text-violet-800'>95%</h3>
             </div>
             <div className='mt-2 h-3 w-full rounded-full bg-lila'>
@@ -69,7 +71,9 @@ Life is all about finding joy in the little things, and these passions bring me 
           </div>
           <div className='pt-6'>
             <div className='flex items-end justify-between'>
-              <h4 className='font-body font-semibold uppercase text-black dark:text-white'>Javascript</h4>
+              <h4 className='font-body font-semibold uppercase text-black dark:text-white'>
+                Javascript
+              </h4>
               <h3 className='font-body text-3xl font-bold text-violet-800'>98%</h3>
             </div>
             <div className='mt-2 h-3 w-full rounded-full bg-lila'>
@@ -78,7 +82,9 @@ Life is all about finding joy in the little things, and these passions bring me 
           </div>
           <div className='pt-6'>
             <div className='flex items-end justify-between'>
-              <h4 className='font-body font-semibold uppercase text-black dark:text-white'>React JS</h4>
+              <h4 className='font-body font-semibold uppercase text-black dark:text-white'>
+                React JS
+              </h4>
               <h3 className='font-body text-3xl font-bold text-violet-800'>98%</h3>
             </div>
             <div className='mt-2 h-3 w-full rounded-full bg-lila'>
@@ -87,7 +93,9 @@ Life is all about finding joy in the little things, and these passions bring me 
           </div>
           <div className='pt-6'>
             <div className='flex items-end justify-between'>
-              <h4 className='font-body font-semibold uppercase text-black dark:text-white'>Figma</h4>
+              <h4 className='font-body font-semibold uppercase text-black dark:text-white'>
+                Figma
+              </h4>
               <h3 className='font-body text-3xl font-bold text-violet-800'>91%</h3>
             </div>
             <div className='mt-2 h-3 w-full rounded-full bg-lila'>
