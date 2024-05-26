@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { Service } from '../Service';
 
 export function Services() {
   return (
@@ -12,93 +12,30 @@ export function Services() {
         </h3>
 
         <div className='grid grid-cols-1 gap-6 pt-10 sm:grid-cols-2 md:gap-10 md:pt-12 lg:grid-cols-3'>
-          <div className='group rounded px-8 py-12 shadow dark:bg-violet-800'>
-            <div className='mx-auto h-24 w-24 text-center xl:h-28 xl:w-28'>
-              <div className='hidden dark:block'>
-                <Image
-                  src='icon-development-white.svg'
-                  alt='development icon'
-                  width={200}
-                  height={200}
-                />
-              </div>
-              <div className='block dark:hidden'>
-                <Image
-                  src='icon-development-black.svg'
-                  alt='development icon'
-                  width={200}
-                  height={200}
-                />
-              </div>
-            </div>
-            <div className='text-center'>
-              <h3 className='pt-8 text-lg font-semibold uppercase text-violet-800 dark:text-yellow-300 lg:text-xl'>
-                WEB DEVELOPMENT
-              </h3>
-              <p className='text-grey pt-4 text-sm dark:text-white md:text-base'>
-                This is my main area of expertise. I have been working with HTML, CSS, and
-                JavaScript for over 10 years.
-              </p>
-            </div>
-          </div>
-          <div className='group rounded px-8 py-12 shadow dark:bg-violet-800'>
-            <div className='mx-auto h-24 w-24 text-center xl:h-28 xl:w-28'>
-              <div className='hidden dark:block'>
-                <Image
-                  src='icon-content-white.svg'
-                  alt='content marketing icon'
-                  width={200}
-                  height={200}
-                />
-              </div>
-              <div className='block dark:hidden'>
-                <Image
-                  src='icon-content-black.svg'
-                  alt='content marketing icon'
-                  width={200}
-                  height={200}
-                />
-              </div>
-            </div>
-            <div className='text-center'>
-              <h3 className='pt-8 text-lg font-semibold uppercase text-violet-800 dark:text-yellow-300 lg:text-xl'>
-                Technical Writing
-              </h3>
-              <p className='text-grey pt-4 text-sm dark:text-white md:text-base'>
-                I have written technical documentation for a number of projects, including API
-                documentation and user guides.
-              </p>
-            </div>
-          </div>
-          <div className='group rounded px-8 py-12 shadow dark:bg-violet-800'>
-            <div className='mx-auto h-24 w-24 text-center xl:h-28 xl:w-28'>
-              <div className='hidden dark:block'>
-                <Image
-                  src='icon-mobile-white.svg'
-                  alt='Mobile Application icon'
-                  width={200}
-                  height={200}
-                />
-              </div>
-              <div className='block dark:hidden'>
-                <Image
-                  src='icon-mobile-black.svg'
-                  alt='Mobile Application icon'
-                  width={200}
-                  height={200}
-                />
-              </div>
-            </div>
-            <div className='text-center'>
-              <h3 className='pt-8 text-lg font-semibold uppercase text-violet-800 dark:text-yellow-300 lg:text-xl'>
-                Mobile Development
-              </h3>
-              <p className='text-grey pt-4 text-sm dark:text-white md:text-base'>
-                I have experience developing mobile applications for both iOS and Android. This
-                include hybrid apps cordova and native apps using React Native.
-              </p>
-            </div>
-          </div>
+          <Service
+            image='icon-development-white.svg'
+            darkImage='icon-development-black.svg'
+            alt='Web development icon'
+            title='WEB DEVELOPMENT'
+            description='This is my main area of expertise. I have been working with HTML, CSS, and
+                JavaScript for over 10 years.'
+          />
+          <Service
+            image='icon-content-white.svg'
+            darkImage='icon-content-black.svg'
+            alt='content marketing icon'
+            title='Technical Writing'
+            description='I have written technical documentation for a number of projects, including API
+                documentation and user guides.'
+          />
+          <Service
+            image='icon-mobile-white.svg'
+            darkImage='icon-mobile-black.svg'
+            alt='Mobile Application icon'
+            title='Mobile Development'
+            description='I have experience developing mobile applications for both iOS and Android. This
+                include hybrid apps cordova and native apps using React Native.'
+          />
         </div>
       </div>
     </main>
