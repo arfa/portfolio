@@ -1,0 +1,100 @@
+---
+title: 'Understanding the Event Loop, Call Stack, and Callback Queue in JavaScript'
+publishedAt: '2024-05-07'
+summary: 'Javascript handles asynchronous operations efficiently, making it appear concurrent. To understand this, we need to dive into the concepts of the event loop, call stack, and callback queue.'
+---
+
+JavaScript is a single-threaded programming language, which means it can execute one piece of code at a time. However, it handles asynchronous operations efficiently, making it appear concurrent. To understand this, we need to dive into the concepts of the event loop, call stack, and callback queue.
+
+## The Call Stack
+
+The call stack is a data structure that keeps track of function calls. When a function is called, it is added to the top of the call stack. When the function completes, it is removed from the stack.
+
+```js
+function first() {
+    console.log('First');
+}
+
+function second() {
+    first();
+    console.log('Second');
+}
+
+second();
+```
+
+- `second()` is called and added to the stack.
+- Inside `second()`, `first()` is called and added to the stack.
+- `first()` completes and is removed from the stack.
+- `second()` completes and is removed from the stack.
+
+This process continues for each function call, ensuring that functions are executed in order.
+
+## The Event Loop
+
+The event loop is the mechanism that handles asynchronous operations in JavaScript. It continuously checks the call stack and the callback queue, ensuring that the call stack is empty before pushing any callback functions from the callback queue to the call stack for execution.
+
+## The Callback Queue
+
+The callback queue is where all the asynchronous operations (like setTimeout, Promises, or event handlers) wait to be executed. When an asynchronous operation completes, its callback function is added to the callback queue.
+
+```js
+console.log('Start');
+
+setTimeout(() => {
+    console.log('Callback');
+}, 2000);
+
+console.log('End');
+```
+
+- `console.log('Start')` is called and executed immediately.
+- `setTimeout` sets up a timer and schedules the callback function to be added to the callback queue after 2000 milliseconds.
+- `console.log('End')` is called and executed immediately.
+- After 2000 milliseconds, the callback function is moved from the callback queue to the call stack (if the call stack is empty) and executed.
+
+## Bringing It All Together
+Let's see a more complex example to understand how the event loop, call stack, and callback queue work together.
+
+Example:
+  
+```js
+console.log('Start');
+
+setTimeout(() => {
+    console.log('Timeout 1');
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log('Promise 1');
+}).then(() => {
+    console.log('Promise 2');
+});
+
+setTimeout(() => {
+    console.log('Timeout 2');
+}, 0);
+
+console.log('End');
+```
+
+Execution Order:
+
+- `console.log('Start')` is executed, and **'Start'** is printed.
+- `setTimeout` is called with a delay of 0 milliseconds. The callback is added to the callback queue.
+- `Promise.resolve().then(...)` is called. The `.then` callback is added to the **microtask queue**.
+- `setTimeout` is called again with a delay of 0 milliseconds. The callback is added to the callback queue.
+- `console.log('End')` is executed, and **'End'** is printed.
+- The call stack is now empty. The event loop checks the **microtask queue** before the callback queue.
+- The first promise callback is executed, printing **'Promise 1'**.
+- The second `.then` callback is executed, printing **'Promise 2'**.
+- The event loop now checks the callback queue. The first `setTimeout` callback is executed, printing **'Timeout 1'**.
+- Finally, the second `setTimeout` callback is executed, printing **'Timeout 2'**.
+
+
+## Conclusion
+- **Call Stack:** Manages function execution, following a LIFO (Last In, First Out) structure.
+- **Event Loop:** Ensures the execution of code, handling asynchronous events by moving callbacks to the call stack when it's empty.
+- **Callback Queue:** Holds asynchronous callbacks, executed when the call stack is clear.
+
+Understanding these concepts helps in writing efficient asynchronous JavaScript and debugging complex code. This is how JavaScript maintains a non-blocking, asynchronous environment despite being single-threaded.

@@ -28,6 +28,7 @@ export function BlogPosts() {
               </h1>
               <p className='text-neutral-500 dark:text-neutral-400'>{post.metadata.summary}</p>
             </div>
+            <hr />
           </Link>
         ))}
     </div>
