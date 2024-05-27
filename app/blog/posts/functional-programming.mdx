@@ -1,0 +1,132 @@
+---
+title: 'Functional Programming'
+publishedAt: '2024-05-27'
+summary: 'Functional programming (FP) is a paradigm that treats computation as the evaluation of mathematical functions and avoids changing state and mutable data.'
+---
+
+JavaScript, though primarily an imperative language, provides robust support for functional programming. This post explores the key concepts of FP in JavaScript, illustrated with practical examples.
+
+## First-Class Functions
+In JavaScript, functions are first-class citizens, meaning they can be assigned to variables, passed as arguments, and returned from other functions.
+
+```ts
+const greet = (name) => `Hello, ${name}`;
+
+const greeter = greet;
+console.log(greeter('Alice')); // "Hello, Alice"
+```
+
+## Pure Functions
+
+Pure functions are functions that always produce the same output for a given input and have no side effects. They are deterministic and easier to test and reason about.
+
+```ts
+const add = (a, b) => a + b;
+
+console.log(add(2, 3)); // 5
+```
+
+## Higher-Order Functions
+
+Higher-order functions are functions that take other functions as arguments or return functions as results. They enable powerful abstractions and composability.
+
+```ts
+const twice = (f, x) => f(f(x));
+
+const square = (x) => x * x;    
+console.log(twice(square, 3)); // 81
+```
+
+## Immutability
+
+Immutability means that data cannot be modified after it is created. Instead of changing existing data, you create new data structures.
+
+```ts
+const numbers = [1, 2, 3, 4, 5];
+
+const doubled = numbers.map((n) => n * 2);
+
+console.log(numbers); // [1, 2, 3, 4, 5]
+console.log(doubled); // [2, 4, 6, 8, 10]
+```
+
+## Function Composition
+
+Function composition is the process of combining multiple functions to produce a new function. It allows you to build complex logic from simpler functions.
+
+```ts
+const compose = (f, g) => (x) => f(g(x));
+
+const add1 = (x) => x + 1;
+const multiply2 = (x) => x * 2;
+
+const add1ThenMultiply2 = compose(multiply2, add1);
+
+console.log(add1ThenMultiply2(3)); // 8
+```
+
+## Closures
+
+Closures are functions that capture variables from their lexical scope. They allow functions to "remember" values even after they have finished executing.
+
+```ts
+const makeCounter = () => {
+  let count = 0;
+  return () => {
+    count += 1;
+    return count;
+  };
+};
+
+const counter = makeCounter();
+
+console.log(counter()); // 1
+
+console.log(counter()); // 2
+```
+
+## Practical Example: A Functional Approach to Array Operations
+
+Functional programming shines when working with arrays. Here's an example of how you can use FP techniques to manipulate arrays in JavaScript.
+
+Consider a simple scenario where we need to filter, map, and reduce an array.
+
+### Imperative Approach
+
+```ts
+const numbers = [1, 2, 3, 4, 5];
+
+let evens = [];
+for (let i = 0; i < numbers.length; i++) {
+  if (numbers[i] % 2 === 0) {
+    evens.push(numbers[i] * 2);
+  }
+}
+
+let sum = 0;
+
+for (let i = 0; i < evens.length; i++) {
+  sum += evens[i];
+}
+
+console.log(sum); // 12
+```
+
+### Functional Approach
+
+```ts
+const numbers = [1, 2, 3, 4, 5];
+
+const sum = numbers
+  .filter((n) => n % 2 === 0)
+  .map((n) => n * 2)
+  .reduce((acc, n) => acc + n, 0);
+
+console.log(sum); // 12
+```
+
+By leveraging the power of functional programming, we can express complex operations in a concise and declarative manner, making our code more readable and maintainable.
+
+## Conclusion
+
+Functional programming in JavaScript encourages writing more predictable, maintainable, and testable code. By leveraging first-class functions, pure functions, higher-order functions, immutability, function composition, and closures, you can harness the full power of the functional paradigm. Start incorporating these concepts into your JavaScript code to see the benefits for yourself!
