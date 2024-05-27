@@ -29,15 +29,15 @@ export default function Navbar(props: NavbarProps) {
             >
               Home
             </Link>
-            {/* <Link
-              href='posts'
+            <Link
+              href='/blog'
               className={cn(
                 'transition-colors hover:text-violet-500 no-wrap',
-                pathname === '/posts' ? 'text-violet-500 font-bold' : 'text-foreground'
+                pathname === '/blog' ? 'text-violet-500 font-bold' : 'text-foreground'
               )}
             >
               Blog
-            </Link> */}
+            </Link>
           </nav>
         </div>
 
