@@ -3,7 +3,6 @@ import { AboutMe } from '@/components/sections/aboutme';
 import { Hero } from '@/components/sections/hero';
 import { Services } from '@/components/sections/services';
 import { WhoIAm } from '@/components/sections/whoiam';
-import { Button } from '@/components/ui/button';
 
 
 

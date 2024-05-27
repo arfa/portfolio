@@ -29,7 +29,7 @@ export default function Navbar(props: NavbarProps) {
             >
               Home
             </Link>
-            <Link
+            {/* <Link
               href='posts'
               className={cn(
                 'transition-colors hover:text-violet-500 no-wrap',
@@ -37,7 +37,7 @@ export default function Navbar(props: NavbarProps) {
               )}
             >
               Blog
-            </Link>
+            </Link> */}
           </nav>
         </div>
 
