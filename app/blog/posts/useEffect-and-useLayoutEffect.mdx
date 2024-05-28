@@ -1,0 +1,125 @@
+---
+title: 'Understanding useEffect and useLayoutEffect in React'
+publishedAt: '2024-03-21'
+summary: 'Among hooks, useEffect and useLayoutEffect play a crucial role in handling side effects.'
+---
+
+## Understanding `useEffect` and `useLayoutEffect` in React
+
+React's hooks API has revolutionized how developers write functional components, offering a more powerful and flexible approach to managing state and side effects. Among these hooks, `useEffect` and `useLayoutEffect` play a crucial role in handling side effects. While they might seem similar at first glance, understanding their differences and appropriate use cases is key to building efficient and effective React applications.
+
+## What is `useEffect`?
+
+`useEffect` is a hook that lets you perform side effects in function components. Side effects can include data fetching, subscriptions, or manually changing the DOM.
+
+```jsx
+import React, { useEffect } from 'react';
+
+function MyComponent() {
+  useEffect(() => {
+    // Code to run on component mount
+    console.log('Component mounted');
+
+    return () => {
+      // Code to run on component unmount
+      console.log('Component unmounted');
+    };
+  }, []); // Empty dependency array ensures this runs only once
+
+  return <div>Hello, World!</div>;
+}
+```
+
+**Key Characteristics of `useEffect`:**
+
+1. Asynchronous Nature: useEffect runs asynchronously and does not block the browser paint process, meaning it doesn’t delay rendering of the UI. This makes it suitable for operations that don’t need to affect the rendering process.
+
+2. Dependency Array: The second argument to useEffect is an array of dependencies. The effect will only re-run if one of these dependencies has changed.
+
+3. Cleanup Function: If your effect returns a function, React will run it when it is time to clean up, such as during component unmounting.
+
+## What is `useLayoutEffect`?
+
+`useLayoutEffect` is similar to `useEffect` but runs synchronously after all DOM mutations. This means it can potentially block the browser from painting.
+
+```jsx
+import React, { useLayoutEffect } from 'react';
+
+function MyComponent() {
+  useLayoutEffect(() => {
+    // Code to run after DOM updates
+    console.log('DOM updated');
+
+    return () => {
+      // Cleanup function
+      console.log('Cleanup after DOM update');
+    };
+  }, []); // Empty dependency array ensures this runs only once
+
+  return <div>Hello, World!</div>;
+}
+```
+
+**Key Characteristics of `useLayoutEffect`:**
+
+1. Synchronous Execution: Unlike useEffect, useLayoutEffect fires synchronously after DOM mutations but before the browser has a chance to paint. This ensures that the DOM is in sync with React’s virtual DOM.
+
+2. Critical Operations: Use useLayoutEffect for operations that need to happen before the browser paints, such as measuring the DOM or synchronously updating the DOM based on changes.
+
+3. Performance Considerations: Since useLayoutEffect runs synchronously, it can block the painting process, leading to potential performance issues if not used sparingly.
+
+## When to Use Which?
+
+Choosing between `useEffect` and `useLayoutEffect` depends on what you need to achieve with your side effect:
+
+1. Use useEffect for:
+
+- Fetching data
+- Subscribing to subscriptions
+- Changing state that does not require immediate DOM updates
+
+2. Use useLayoutEffect for:
+
+- Reading layout information from the DOM (e.g., getting the size or position of a DOM element)
+- Updating the DOM synchronously
+- Running code that must complete before the browser paints
+
+**Example Scenario**
+
+Consider a scenario where you need to measure the dimensions of a DOM element right after it has been rendered and then set those dimensions in the state:
+
+```jsx
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+
+function DimensionComponent() {
+  const divRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useLayoutEffect(() => {
+    // Measure the dimensions synchronously after the DOM updates
+    if (divRef.current) {
+      const { offsetWidth, offsetHeight } = divRef.current;
+      setDimensions({ width: offsetWidth, height: offsetHeight });
+    }
+  }, []); // Empty dependency array ensures this runs only once
+
+  useEffect(() => {
+    // Log dimensions asynchronously after the DOM has painted
+    console.log('Dimensions:', dimensions);
+  }, [dimensions]); // Re-run if dimensions change
+
+  return <div ref={divRef} style={{ width: '100%', height: '100%' }}>Measured Div</div>;
+}
+```
+
+In this example, `useLayoutEffect` ensures the dimensions are measured before the browser paints, guaranteeing accurate measurements. `useEffect` logs the dimensions asynchronously without blocking the browser paint.
+
+## Conclusion
+
+Both `useEffect` and `useLayoutEffect` are powerful tools for managing side effects in React functional components. Understanding their differences and knowing when to use each will help you write more efficient and effective React code. Use `useEffect` for most side effects to avoid blocking the browser paint process, and reserve `useLayoutEffect` for situations where synchronous DOM updates are necessary.
+
+
+
+
+
+
