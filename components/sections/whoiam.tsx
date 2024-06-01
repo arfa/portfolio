@@ -3,11 +3,37 @@ import { FaInstagram, FaTwitter, FaLinkedin, FaGithub, FaChevronRight } from 're
 import { Progress } from '@/components/ui/progress';
 import { Expertise } from '../Expertise';
 import { ConnectWithMe } from '../ConnectWithMe';
+import IconCloud from '../icon-cloud';
 
 export function WhoIAm() {
+  const slugs = [
+    'typescript',
+    'javascript',
+    'react',
+    'html5',
+    'css3',
+    'nodedotjs',
+    'express',
+    'nextdotjs',
+    'amazonaws',
+    'postgresql',
+    'vercel',
+    'testinglibrary',
+    'jest',
+    'cypress',
+    'docker',
+    'git',
+    'jira',
+    'github',
+    'gitlab',
+    'visualstudiocode',
+    'sonarqube',
+    'figma',
+  ];
+
   return (
     <div className=' w-full dark:bg-slate-800'>
-      <div className='container flex flex-col items-center py-16 md:py-20 lg:flex-row'>
+      <div className='container flex flex-col items-center py-10 md:py-20 lg:flex-row'>
         <div className='text-center sm:w-3/4 lg:w-3/5 lg:text-left'>
           <h2 className='font-header text-4xl font-semibold uppercase text-violet-800 sm:text-5xl lg:text-6xl'>
             Who am I?
@@ -42,11 +68,8 @@ Life is all about finding joy in the little things, and these passions bring me 
             chevronColor='text-violet-500'
           />
         </div>
-        <div className='pl-0 pt-10 w-full lg:w-2/5 lg:pl-12 lg:pt-0'>
-          <Expertise title='HTML & CSS' percentage={95} className='pt-6' />
-          <Expertise title='Javascript / Typescript' percentage={95} className='pt-6' />
-          <Expertise title='React JS' percentage={98} className='pt-6' />
-          <Expertise title='Next JS' percentage={95} className='pt-6' />
+        <div className='relative flex h-full w-full max-w-[32rem] items-center justify-center overflow-hidden rounded-lg  bg-background md:p-20 p-4'>
+          <IconCloud iconSlugs={slugs} />
         </div>
       </div>
     </div>
