@@ -12,7 +12,6 @@ interface NavbarProps {}
 
 export default function Navbar(props: NavbarProps) {
   const pathname = usePathname();
-  console.log('pathname: ', pathname);
   const { setTheme, theme } = useTheme();
 
   return (
@@ -33,7 +32,7 @@ export default function Navbar(props: NavbarProps) {
               href='/blog'
               className={cn(
                 'transition-colors hover:text-violet-500 no-wrap',
-                pathname === '/blog' ? 'text-violet-500 font-bold' : 'text-foreground'
+                pathname.startsWith('/blog') ? 'text-violet-500 font-bold' : 'text-foreground'
               )}
             >
               Blog
