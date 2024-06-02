@@ -1,0 +1,186 @@
+---
+title: 'Unit Tests, Integration Tests, and End-to-End Tests in React with Jest, React Testing Library, and Cypress'
+publishedAt: '2024-05-31'
+summary: 'In the React ecosystem, Jest, React Testing Library, and Cypress are popular tools for different types of testing: unit tests, integration tests, and end-to-end (E2E) tests.'
+---
+
+Testing is a crucial part of developing robust applications. In the React ecosystem, Jest, React Testing Library, and Cypress are popular tools for different types of testing: unit tests, integration tests, and end-to-end (E2E) tests. This blog post will explore these testing methodologies with practical examples.
+
+## Unit Tests
+
+**Unit tests** focus on individual components or functions in isolation. They ensure that a specific part of the code works as expected. In React, this typically involves testing a single component.
+
+**Tools:** Jest and React Testing Library
+
+### Example: Testing a Button Component
+
+First, let's create a simple `Button` component:
+
+```jsx
+// Button.js
+import React from 'react';
+
+const Button = ({ onClick, label }) => {
+  return <button onClick={onClick}>{label}</button>;
+};
+
+export default Button;
+```
+
+Now, let's write a unit test for this component using Jest and React Testing Library:
+
+```jsx
+// Button.test.js
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import Button from './Button';
+
+test('Button displays label and handles click', () => {
+  const handleClick = jest.fn();
+  const { getByText } = render(<Button onClick={handleClick} label="Click Me" />);
+
+  const button = getByText('Click Me');
+  
+  // Check if the label is correct
+  expect(button).toBeInTheDocument();
+
+  // Simulate a click event
+  fireEvent.click(button);
+
+  // Check if the click handler was called
+  expect(handleClick).toHaveBeenCalledTimes(1);
+});
+```
+
+## Integration Tests
+
+**Integration tests** verify that different parts of the application work together as expected. These tests can involve multiple components interacting with each other.
+
+**Tools:** Jest and React Testing Library
+
+### Example: Testing a Form Component
+
+Let's create a `LoginForm` component that uses the `Button` component:
+
+```jsx
+// LoginForm.js
+import React, { useState } from 'react';
+import Button from './Button';
+
+const LoginForm = ({ onSubmit }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = () => {
+    onSubmit({ username, password });
+  };
+
+  return (
+    <form>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Username"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <Button onClick={handleSubmit} label="Login" />
+    </form>
+  );
+};
+
+export default LoginForm;
+```
+
+Now, let's write an integration test for this component:
+
+```jsx
+// LoginForm.test.js
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import LoginForm from './LoginForm';
+
+test('LoginForm submits username and password', () => {
+  const handleSubmit = jest.fn();
+  const { getByPlaceholderText, getByText } = render(<LoginForm onSubmit={handleSubmit} />);
+
+  fireEvent.change(getByPlaceholderText('Username'), { target: { value: 'testuser' } });
+  fireEvent.change(getByPlaceholderText('Password'), { target: { value: 'password123' } });
+
+  fireEvent.click(getByText('Login'));
+
+  expect(handleSubmit).toHaveBeenCalledWith({ username: 'testuser', password: 'password123' });
+});
+```
+
+## End-to-End Tests
+
+**End-to-End (E2E) tests** simulate real user scenarios and test the application from start to finish. They ensure that the entire application stack works together seamlessly.
+
+**Tools:** Cypress
+
+### Example: Testing a Login Flow
+
+Assume we have a simple login flow in our application. We'll write an E2E test to ensure the login process works correctly.
+
+First, let's create a `Login` component that integrates `LoginForm`:
+
+```jsx
+// Login.js
+import React from 'react';
+import LoginForm from './LoginForm';
+
+const Login = () => {
+  const handleLogin = ({ username, password }) => {
+    if (username === 'testuser' && password === 'password123') {
+      alert('Login successful');
+    } else {
+      alert('Login failed');
+    }
+  };
+
+  return <LoginForm onSubmit={handleLogin} />;
+};
+
+export default Login;
+```
+
+Now, let's write an E2E test using Cypress:
+
+```javascript
+// cypress/integration/login.spec.js
+describe('Login Flow', () => {
+  it('should log in successfully with correct credentials', () => {
+    cy.visit('/login');
+
+    cy.get('input[placeholder="Username"]').type('testuser');
+    cy.get('input[placeholder="Password"]').type('password123');
+    cy.get('button').contains('Login').click();
+
+    cy.on('window:alert', (text) => {
+      expect(text).to.contains('Login successful');
+    });
+  });
+
+  it('should fail to log in with incorrect credentials', () => {
+    cy.visit('/login');
+
+    cy.get('input[placeholder="Username"]').type('wronguser');
+    cy.get('input[placeholder="Password"]').type('wrongpassword');
+    cy.get('button').contains('Login').click();
+
+    cy.on('window:alert', (text) => {
+      expect(text).to.contains('Login failed');
+    });
+  });
+});
+```
+
+## Conclusion
+
+Testing is a vital part of building reliable React applications. By leveraging Jest, React Testing Library, and Cypress, you can ensure that your components work individually (unit tests), integrate well with each other (integration tests), and function correctly from a user's perspective (E2E tests). This multi-layered approach to testing helps catch bugs early and improves the overall quality of your application. Happy testing!
