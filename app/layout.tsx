@@ -6,6 +6,8 @@ import { ThemeProvider } from '@/components/theme-provider';
 
 import { cn } from '@/lib/utils';
 import Navbar from '@/components/Navbar';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -34,6 +36,8 @@ export default function RootLayout({
           <Navbar />
           {children}
         </ThemeProvider>
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
