@@ -1,0 +1,143 @@
+---
+title: 'Essential Matchers for Jest and React Testing Library'
+publishedAt: '2024-06-21'
+summary: 'When testing your applications, having a reliable set of matchers is crucial.'
+---
+
+When testing your applications, having a reliable set of matchers is crucial. Jest and React Testing Library provide a comprehensive suite of matchers to facilitate effective and thorough testing. Here’s a guide to some of the most commonly used matchers from these libraries.
+
+## Jest Matchers
+
+Jest offers a wide range of built-in matchers to help you test various aspects of your code. Here are some of the most commonly used Jest matchers:
+
+### 1. `toBe`
+Used for comparing primitive values.
+
+```javascript
+expect(2 + 2).toBe(4);
+```
+
+### 2. `toEqual`
+Used for deep equality checks, typically for objects and arrays.
+
+```javascript
+const obj = { a: 1, b: 2 };
+expect(obj).toEqual({ a: 1, b: 2 });
+```
+
+### 3. `toBeNull`
+Used to check if a value is null.
+
+```javascript
+expect(null).toBeNull();
+```
+
+### 4. `toBeUndefined`
+Used to check if a value is undefined.
+
+```javascript
+expect(undefined).toBeUndefined();
+```
+
+### 5. `toBeTruthy`
+Used to check if a value is truthy.
+
+```javascript
+expect(1).toBeTruthy();
+```
+
+### 6. `toBeFalsy`
+Used to check if a value is falsy.
+
+```javascript
+expect(0).toBeFalsy();
+```
+
+### 7. `toContain`
+Used to check if an array or iterable contains a particular item.
+
+```javascript
+const shoppingList = ['milk', 'bread', 'eggs'];
+expect(shoppingList).toContain('milk');
+```
+
+### 8. `toHaveLength`
+Used to check the length of an array or string.
+
+```javascript
+const shoppingList = ['milk', 'bread', 'eggs'];
+expect(shoppingList).toHaveLength(3);
+```
+
+### 9. `toThrow`
+Used to check if a function throws an error.
+
+```javascript
+function compileCode() {
+  throw new Error('you are using the wrong JDK');
+}
+expect(compileCode).toThrow('you are using the wrong JDK');
+```
+
+## React Testing Library Matchers
+
+React Testing Library extends Jest with a set of matchers specifically designed for testing React components. These matchers are provided by the `@testing-library/jest-dom` package.
+
+### 1. `toBeInTheDocument`
+Used to check if an element is present in the DOM.
+
+```javascript
+import '@testing-library/jest-dom/extend-expect';
+expect(element).toBeInTheDocument();
+```
+
+### 2. `toHaveTextContent`
+Used to check if an element has specific text content.
+
+```javascript
+expect(element).toHaveTextContent('Hello World');
+```
+
+### 3. `toHaveAttribute`
+Used to check if an element has a specific attribute with a specific value.
+
+```javascript
+expect(linkElement).toHaveAttribute('href', '/home');
+```
+
+### 4. `toBeVisible`
+Used to check if an element is visible to the user.
+
+```javascript
+expect(buttonElement).toBeVisible();
+```
+
+### 5. `toBeDisabled`
+Used to check if a form element (like a button or input) is disabled.
+
+```javascript
+expect(buttonElement).toBeDisabled();
+```
+
+### 6. `toHaveClass`
+Used to check if an element has a specific class.
+
+```javascript
+expect(element).toHaveClass('active');
+```
+
+### 7. `toBeChecked`
+Used to check if a checkbox or radio button is checked.
+
+```javascript
+expect(checkboxElement).toBeChecked();
+```
+
+### 8. `toHaveStyle`
+Used to check if an element has specific inline styles.
+
+```javascript
+expect(element).toHaveStyle('display: none');
+```
+
+By combining these matchers, you can write comprehensive tests for your React components, ensuring that your applications are robust and error-free. Happy testing!
