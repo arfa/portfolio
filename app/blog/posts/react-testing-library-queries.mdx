@@ -1,0 +1,95 @@
+---
+title: 'A Comprehensive Guide to React Testing Library Queries'
+publishedAt: '2024-06-26'
+summary: 'One of the core features of RTL is its query system, which provides a variety of ways to select elements from the DOM.'
+---
+
+
+React Testing Library (RTL) is a popular testing framework that helps developers write tests for React applications. One of the core features of RTL is its query system, which provides a variety of ways to select elements from the DOM. Understanding how to use these queries effectively can significantly improve the quality and maintainability of your tests. In this blog post, we'll explore the most commonly used queries in React Testing Library and provide examples to illustrate their use.
+
+## Query Types in React Testing Library
+
+RTL provides several types of queries, each with its own use case. These queries can be broadly categorized as follows:
+
+1. **Single Element Queries**
+2. **Multiple Elements Queries**
+3. **Text Matching Options**
+4. **Query Variants**
+
+### 1. Single Element Queries
+
+Single element queries return the first matching element. They throw an error if no element or more than one element is found. These are useful when you expect only one element to match the query.
+
+- **`getBy` Queries**: These will throw an error if no elements are found.
+  - `getByRole`
+  - `getByLabelText`
+  - `getByPlaceholderText`
+  - `getByText`
+  - `getByDisplayValue`
+  - `getByAltText`
+  - `getByTitle`
+  - `getByTestId`
+
+Example:
+```javascript
+const button = getByRole('button', { name: /submit/i });
+```
+
+### 2. Multiple Elements Queries
+
+Multiple elements queries return all matching elements. They are useful when you expect more than one element to match the query.
+
+- **`getAllBy` Queries**: These will throw an error if no elements are found.
+  - `getAllByRole`
+  - `getAllByLabelText`
+  - `getAllByPlaceholderText`
+  - `getAllByText`
+  - `getAllByDisplayValue`
+  - `getAllByAltText`
+  - `getAllByTitle`
+  - `getAllByTestId`
+
+Example:
+```javascript
+const buttons = getAllByRole('button', { name: /submit/i });
+```
+
+### 3. Text Matching Options
+
+RTL provides various ways to match text within elements, enhancing the flexibility and precision of your queries.
+
+- **`String`**: Direct string match.
+- **`Regex`**: Regular expression match.
+- **`Function`**: Custom function to match text.
+
+Example:
+```javascript
+const heading = getByText((content, element) => element.tagName.toLowerCase() === 'h1' && content.startsWith('Welcome'));
+```
+
+### 4. Query Variants
+
+RTL offers several variants of queries to handle different testing scenarios:
+
+- **`getBy` Queries**: Throws an error if no element is found (recommended for most cases).
+- **`queryBy` Queries**: Returns `null` if no element is found (useful for conditional rendering).
+- **`findBy` Queries**: Returns a promise and waits for the element to appear (useful for async operations).
+
+Example:
+```javascript
+// Using queryBy when the element may or may not be in the DOM
+const optionalButton = queryByRole('button', { name: /submit/i });
+
+// Using findBy for async operations
+const asyncButton = await findByRole('button', { name: /submit/i });
+```
+
+## Best Practices
+
+1. **Use Role Queries First**: Whenever possible, prefer `getByRole` for its accessibility benefits and robustness.
+2. **Fallback to Text Queries**: When role queries are not feasible, `getByText` and similar text-based queries are good alternatives.
+3. **Avoid Over-Specific Queries**: Prefer queries that resemble how users interact with your app. Avoid using `getByTestId` unless absolutely necessary.
+
+## Conclusion
+
+The query system in React Testing Library is designed to be intuitive and powerful, enabling you to write tests that closely mimic user interactions. By understanding and leveraging the different types of queries and their variants, you can create more reliable and maintainable tests. Experiment with the different queries and find the ones that best suit your testing needs.
