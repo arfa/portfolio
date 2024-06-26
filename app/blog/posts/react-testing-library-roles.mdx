@@ -1,0 +1,91 @@
+---
+title: 'Using Roles in React Testing Library'
+publishedAt: '2024-06-26'
+summary: 'React Testing Library encourages the use of roles to find elements in your tests.'
+---
+
+
+React Testing Library encourages the use of roles to find elements in your tests. This approach not only makes your tests more accessible but also ensures that they closely mirror how users interact with your application.
+
+## Why Use Roles?
+
+By using roles, you align your tests with the accessibility tree, ensuring that your application is usable by assistive technologies. This practice enhances both the quality and reliability of your tests.
+
+## Common Default Roles
+
+Here is a short list of default roles you might use in your tests:
+
+1. **button** - For clickable buttons.
+2. **checkbox** - For checkboxes.
+3. **textbox** - For input fields that accept text.
+4. **link** - For anchor elements that link to other locations.
+5. **radio** - For radio buttons.
+6. **combobox** - For combo boxes (drop-downs).
+7. **list** - For lists, such as `<ul>` or `<ol>`.
+8. **listitem** - For items within a list.
+9. **heading** - For headings, such as `<h1>`, `<h2>`, etc.
+10. **dialog** - For dialog windows.
+
+## Example: Using Roles in Tests
+
+Let's walk through an example to demonstrate how to use these roles in your tests.
+
+### Component: ExampleComponent.jsx
+
+First, we'll create a simple React component that includes various elements:
+
+```jsx
+import React from 'react';
+
+function ExampleComponent() {
+  return (
+    <div>
+      <h1>Title</h1>
+      <button>Click me</button>
+      <input type="text" placeholder="Enter text" />
+      <a href="/about">About</a>
+    </div>
+  );
+}
+
+export default ExampleComponent;
+```
+
+### Test: ExampleComponent.test.jsx
+
+Next, we'll write a test that uses roles to find these elements:
+
+```jsx
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import ExampleComponent from './ExampleComponent';
+
+test('renders elements with correct roles', () => {
+  render(<ExampleComponent />);
+
+  // Find elements by their roles
+  const heading = screen.getByRole('heading', { level: 1 });
+  const button = screen.getByRole('button');
+  const textbox = screen.getByRole('textbox');
+  const link = screen.getByRole('link');
+
+  // Assert that elements are in the document
+  expect(heading).toBeInTheDocument();
+  expect(button).toBeInTheDocument();
+  expect(textbox).toBeInTheDocument();
+  expect(link).toBeInTheDocument();
+});
+```
+
+### Explanation
+
+- `getByRole('heading', { level: 1 })` finds the `<h1>` element by its role and level.
+- `getByRole('button')` finds the `<button>` element by its role.
+- `getByRole('textbox')` finds the `<input>` element with type "text" by its role.
+- `getByRole('link')` finds the `<a>` element by its role.
+
+By using `getByRole`, we ensure that our tests are closely aligned with how users interact with the UI, improving both accessibility and reliability.
+
+## Conclusion
+
+Using roles in React Testing Library is a powerful way to write accessible and maintainable tests. By leveraging roles, you can create tests that are more intuitive and robust, ultimately leading to a better user experience. So, next time you write a test, remember to consider using roles to find elements and ensure your application is accessible to all users.
