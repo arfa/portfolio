@@ -1,0 +1,104 @@
+---
+title: 'Typescript Generics Overview'
+publishedAt: '2024-08-05'
+summary: 'An overview of TypeScript generics and how to use them in your code'
+---
+
+In TypeScript, **generics** allow you to create reusable components, functions, and classes that can work with any data type. Generics provide a way to create functions, interfaces, or classes that are not restricted to a specific type but can work with various types while maintaining strong type safety.
+
+### 1. **Generic Functions**
+A function can be made generic by using a type variable, often denoted as `T`, which can then be used as a placeholder for the type of the input, output, or both.
+
+```typescript
+function identity<T>(arg: T): T {
+    return arg;
+}
+
+let result1 = identity<string>("Hello, TypeScript!");
+let result2 = identity<number>(42);
+```
+
+### 2. **Generic Interfaces**
+Interfaces can also be made generic to represent a wide range of types.
+
+```typescript
+interface GenericInterface<T> {
+    value: T;
+    getValue: () => T;
+}
+
+const stringGeneric: GenericInterface<string> = {
+    value: "Hello",
+    getValue: () => "Hello",
+};
+
+const numberGeneric: GenericInterface<number> = {
+    value: 100,
+    getValue: () => 100,
+};
+```
+
+### 3. **Generic Classes**
+You can use generics with classes to allow them to work with different types while maintaining type safety.
+
+```typescript
+class GenericClass<T> {
+    private data: T;
+
+    constructor(data: T) {
+        this.data = data;
+    }
+
+    getData(): T {
+        return this.data;
+    }
+}
+
+const stringClass = new GenericClass<string>("Hello");
+console.log(stringClass.getData()); // Output: Hello
+
+const numberClass = new GenericClass<number>(123);
+console.log(numberClass.getData()); // Output: 123
+```
+
+### 4. **Generic Constraints**
+You can constrain the types that a generic type can accept by using the `extends` keyword. This ensures that the type used in a generic must have certain properties or be a subtype of a particular type.
+
+```typescript
+interface Lengthwise {
+    length: number;
+}
+
+function logLength<T extends Lengthwise>(arg: T): T {
+    console.log(arg.length);
+    return arg;
+}
+
+logLength("Hello");  // Works, because string has a 'length' property
+logLength([1, 2, 3]);  // Works, because arrays have a 'length' property
+```
+
+### 5. **Multiple Type Parameters**
+You can use multiple type parameters in generics to handle multiple types simultaneously.
+
+```typescript
+function pair<T, U>(first: T, second: U): [T, U] {
+    return [first, second];
+}
+
+const mixedPair = pair<string, number>("One", 1);
+```
+
+### 6. **Default Type Parameters**
+You can provide default types for generics, which will be used if the type is not specified explicitly.
+
+```typescript
+function createArray<T = string>(length: number, value: T): T[] {
+    return Array(length).fill(value);
+}
+
+const stringArray = createArray(3, "a"); // Type is inferred as string[]
+const numberArray = createArray<number>(3, 2); // Explicitly specifying type
+```
+
+Generics in TypeScript provide a powerful way to create flexible and reusable components while maintaining type safety across different use cases.

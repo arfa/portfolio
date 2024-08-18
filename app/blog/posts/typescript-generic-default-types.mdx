@@ -1,0 +1,77 @@
+---
+title: 'Typescript Generics Default Types'
+publishedAt: '2024-08-13'
+summary: 'An overview of TypeScript generics and how to use default types in your code'
+---
+
+In TypeScript, **default types for generics** allow you to specify a default type that will be used if no type is provided when the generic is invoked. This feature is particularly useful when you want to provide a sensible default but still allow flexibility for the user to override it with a different type.
+
+### Example of Default Types in Generics
+
+#### 1. **Generic Function with Default Type**
+
+Here’s how you can define a function with a generic that has a default type:
+
+```typescript
+function createArray<T = string>(length: number, value: T): T[] {
+    return Array(length).fill(value);
+}
+
+// Using the default type
+const stringArray = createArray(3, "a");  // Type is inferred as string[]
+
+// Overriding the default type
+const numberArray = createArray<number>(3, 2);  // Explicitly specifying type as number[]
+```
+
+- In the first case, since no type is provided, `T` defaults to `string`, and the function returns an array of strings.
+- In the second case, the type is explicitly set to `number`, so the function returns an array of numbers.
+
+#### 2. **Generic Interface with Default Type**
+
+You can also use default types in generic interfaces:
+
+```typescript
+interface Box<T = string> {
+    value: T;
+}
+
+const stringBox: Box = { value: "Hello" };  // T defaults to string
+const numberBox: Box<number> = { value: 100 };  // T is explicitly set to number
+```
+
+- `stringBox` uses the default type of `string`.
+- `numberBox` overrides the default type with `number`.
+
+#### 3. **Generic Class with Default Type**
+
+Classes can also have default types for generics:
+
+```typescript
+class Container<T = string> {
+    private contents: T;
+
+    constructor(contents: T) {
+        this.contents = contents;
+    }
+
+    getContents(): T {
+        return this.contents;
+    }
+}
+
+const stringContainer = new Container("Default String");  // T defaults to string
+const numberContainer = new Container<number>(123);  // T is explicitly set to number
+```
+
+- `stringContainer` defaults to a `string` type.
+- `numberContainer` is explicitly specified as a `number`.
+
+### Benefits of Default Types
+
+- **Convenience:** Users can invoke generic types without having to explicitly specify the type every time, making the API easier to use when a common type is expected.
+- **Flexibility:** The user can still override the default type if a different type is needed.
+
+### Summary
+
+Default types in generics enhance the flexibility of your code while providing sensible defaults that simplify the user experience. They are particularly useful when you want to cover the most common use case but still allow for custom types when necessary.

@@ -1,0 +1,113 @@
+---
+title: 'Typescript Generics extends'
+publishedAt: '2024-08-16'
+summary: 'An overview of TypeScript generics and how to use extends in your code'
+---
+
+In TypeScript, the `extends` keyword is used with generics to create constraints. These constraints limit the types that can be used as arguments for the generic type. This ensures that the generic type must adhere to a certain structure or be a subtype of a specific type.
+
+### Generic Constraints Using `extends`
+
+#### 1. **Basic Constraint with `extends`**
+
+You can constrain a generic type to extend from a particular type, such as an interface or a class. This ensures that the type passed as a generic must include the properties or methods defined in the constraint.
+
+```typescript
+interface Lengthwise {
+    length: number;
+}
+
+function logLength<T extends Lengthwise>(arg: T): T {
+    console.log(arg.length);
+    return arg;
+}
+
+// Valid usages
+logLength("Hello");  // Strings have a 'length' property
+logLength([1, 2, 3]);  // Arrays have a 'length' property
+logLength({ length: 10, value: 42 });  // Objects with a 'length' property
+
+// Invalid usage
+// logLength(42);  // Error: Argument of type 'number' is not assignable to parameter of type 'Lengthwise'.
+```
+
+- In the example above, `T` is constrained to types that have a `length` property, which means you can pass in strings, arrays, or objects with a `length` property, but not numbers or other types that lack this property.
+
+#### 2. **Multiple Constraints**
+
+A generic type can be constrained by multiple types using intersection types (`&`):
+
+```typescript
+interface HasName {
+    name: string;
+}
+
+interface HasAge {
+    age: number;
+}
+
+function logPerson<T extends HasName & HasAge>(person: T): void {
+    console.log(`${person.name} is ${person.age} years old.`);
+}
+
+logPerson({ name: "Alice", age: 30 });  // Valid
+
+// Invalid usage
+// logPerson({ name: "Bob" });  // Error: Property 'age' is missing in type '{ name: string; }'.
+// logPerson({ age: 25 });  // Error: Property 'name' is missing in type '{ age: number; }'.
+```
+
+- Here, `T` must extend both `HasName` and `HasAge`, so it must include both `name` and `age` properties.
+
+#### 3. **Constraining with Classes**
+
+You can also constrain generics to be subclasses of a specific class.
+
+```typescript
+class Animal {
+    constructor(public name: string) {}
+}
+
+class Dog extends Animal {
+    bark() {
+        console.log("Woof!");
+    }
+}
+
+function createAnimal<T extends Animal>(animal: T): T {
+    console.log(animal.name);
+    return animal;
+}
+
+const dog = createAnimal(new Dog("Buddy"));  // Valid
+dog.bark();  // Works because dog is of type Dog
+
+// Invalid usage
+// createAnimal("Not an animal");  // Error: Argument of type 'string' is not assignable to parameter of type 'Animal'.
+```
+
+- In this example, `T` is constrained to types that extend the `Animal` class, so the function can only accept instances of `Animal` or its subclasses.
+
+#### 4. **Using `keyof` for Constraints**
+
+You can also constrain a generic type to be a key of another type using `keyof`:
+
+```typescript
+function getProperty<T, K extends keyof T>(obj: T, key: K) {
+    return obj[key];
+}
+
+const person = { name: "Alice", age: 25 };
+
+const name = getProperty(person, "name");  // Valid, returns "Alice"
+const age = getProperty(person, "age");  // Valid, returns 25
+
+// Invalid usage
+// const invalid = getProperty(person, "address");  // Error: Argument of type '"address"' is not assignable to parameter of type 'keyof { name: string; age: number; }'.
+```
+
+- Here, `K` is constrained to be a key of the object `T`, which ensures that only valid property names can be passed to `getProperty`.
+
+### Summary
+
+Using `extends` with generics in TypeScript allows you to constrain the types that can be passed as generic arguments. This enhances type safety by ensuring that the generic type meets specific requirements, whether it's implementing an interface, being a subclass of a class, or being a key of an object. This helps to create more robust and maintainable code by enforcing the necessary structure at compile time.
